@@ -16,5 +16,18 @@ Created by alex
 # This is a class. A Class is how you create and define the object.
 class Plant:
     """
-    Plant class
+    Plant class to characterize a plant.
     """
+
+    def __init__(self, size, color, leaves):
+        """
+        This is the initialize function. In here there
+
+        :param
+        :param color: Color of the plant
+        :param leaves:
+        """
+        self.size = size
+        self.color = color
+        self.leaves = leaves
+
