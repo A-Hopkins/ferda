@@ -52,6 +52,7 @@ print(fern.height)  # We see that the height of the fern is 0! Let's make it gro
 
 # If we want fern to grow we use the method grow on it like so
 fern.grow(9)    # We grow it by 9 units
+print(fern.height)
 
 """
 Now for the challenge. You have just learned how to create a class and some methods that alter the data of the class.
