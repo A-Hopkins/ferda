@@ -1,4 +1,9 @@
 """
+
+Created by alex
+"""
+
+"""
 This is the first example. Dice rolling example. I know how much you love random numbers boys. Today you'll see how to
 do random numbers in python. This example will be how to roll a dice.
 
