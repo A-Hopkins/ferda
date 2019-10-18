@@ -1,71 +1,84 @@
 """
-This is the first example. Dice rolling example. I know how much you love random numbers boys. Today you'll see how to
-do random numbers in python. This example will be how to roll a dice.
+Dice Rolling game
 
-Created by alex
-modified by Chace
+Created by Chace
 """
 # Most of the things for random numbers in python will be imported from the 'random' package
 import random
 
+class Player:
+
+    def __init__(self, name, diceroll):
+        self.name = name
+        self.diceroll = diceroll
+        self.wins = 0
+
+    def changename(self, namechange):
+        self.name = namechange
 
 
 def roll(min_num, max_num):
-    """
-    This function rolls a random number between the parameters min and max.
 
-    :param min_num: int minimum number to roll
-    :param max_num: int maximum number to roll
-
-    :return rolled: int rolled number
-    """
     rolled = random.randint(min_num, max_num)
+
     return rolled
 
 
+playlist = []
 
-while input() == "start game":
-        print("Welcome to my Dice Game\n First player to 100 wins")
-        hpoints = 0;
-        pone = 0;
-        ptwo = 0;
+print("Type start\n")
 
-        while hpoints <= 100:
-                dice1 = roll(1, 6)
-                print("Player ONE Rolled a ")
-                print(dice1)
-                print("\n")
-                pone = pone + dice1
-                if(pone > hpoints):
-                    hpoints = pone
-                print (pone)
-                if(hpoints >= 100):
-                    break
+while input() == "start":
+        print("Welcome to my Dice Game")
+        maxbet = input("Enter your max bet\n")
+        mbet = int(maxbet)
+        players = input("Enter amount of players\n")
+        tp = int(players)
+
+        x = 0
+        if tp == 0:
+            break
+        while x < tp:
+            print("Enter Player " + str(x+1) + " name:\n")
+            playlist.append(Player(input(), mbet))
+            x += 1
+
+        hpoints = 1
+        score = 0
+        player = 0
+        total = 0
+
+        while hpoints != 0:
+            y = 0
+            z = 0
+            p = 0
+            while z < tp:
+
+                dice1 = roll(1,6)
                 dice2 = roll(1,6)
-                print("Player TWO Rolled a ")
-                print(dice2)
-                ptwo = ptwo + dice2
-                if(ptwo > hpoints):
-                    hpoints = ptwo
-                print(ptwo)
+                total = dice1+dice2
+                print(playlist[y].name + " Rolled " + str(total))
+                playlist[y].diceroll = total
+                y += 1
+                z += 1
 
-        print("\nThe game is over \n")
-        if (pone > ptwo):
-            print("Player ONE Won")
-        else:
-            print("Player TWO One")
+                if y >= tp:
+                    y = 0
+            player = 0
+            hs = 0
 
-"""number = roll(1, 6)
-    print(number)"""
+            for i in range(0, len(playlist)):
+                if hs < playlist[i].diceroll:
+                    hs = playlist[i].diceroll
+                    player = i
 
-"""
-Here I have created a function called roll. It takes two parameters explained in the function. There is a loop that runs
-until you input anything other than roll. Shown in this small program is random integers, wile loops, print statements,
-and simple functions that return a value.
+            playlist[player].wins += 1
+            print(playlist[player].name + " Has won Round " + str(hpoints) + " and has " + str(playlist[player].wins) + " Wins")
+            hpoints += 1
 
-Here's the challenge.
-
-Extend this idea of rolling a random number into a dice game. Roll two dice and the highest number wins.
-Extra credit:
-add a money tracker to see who wins the gamble.
-"""
+            for i in range(0, len(playlist)):
+                if mbet <= playlist[i].wins:
+                    hpoints = mbet
+                    print("\n" + playlist[player].name + " WINS")
+                    print("\nThe game is over \n")
+                    hpoints = 0
